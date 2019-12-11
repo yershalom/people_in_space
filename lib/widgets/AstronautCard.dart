@@ -31,70 +31,107 @@ class AstronautCard extends StatelessWidget {
     var bio = astronaut.bio;
     var biolink = astronaut.biolink;
     var twitter = astronaut.twitter;
+    var daysinspace = astronaut.daysinspace;
+
+    var cardImage = Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(biophoto),
+        ),
+      ),
+    );
 
     var cardContent = Container(
-      padding: EdgeInsets.all(10.0),
-      margin: EdgeInsets.all(5.0),
-      height: 100.0,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(name),
-        ],
-      ),
-    );
-    final cardIcon = Container(
-        padding: const EdgeInsets.all(16.0),
-        margin: EdgeInsets.symmetric(vertical: 16.0),
-        alignment: FractionalOffset.centerLeft,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: EdgeInsets.all(16.0),
+        margin: EdgeInsets.all(5.0),
+        height: 170.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Padding(
-              child: Image.network(countryflag, height: 32.0, width: 32.0),
-              padding: EdgeInsets.only(bottom: 15.0),
-            ),
-            CachedNetworkImage(
-              imageUrl: biophoto,
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                      colorFilter:
-                          ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[cardImage, Text(name)],
                 ),
-              ),
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Image.network(countryflag, height: 32.0, width: 32.0),
+                    Text(title),
+                  ],
+                )
+              ],
             ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[Text(daysinspace), Text("DAYS IN SPACE")],
+            )
           ],
         ));
-    var cardText = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            child: new Text(name, style: headerTextStyle),
-            padding: EdgeInsets.only(bottom: 15.0),
-          ),
-          Text(title),
-          Text(bio.length > 32 ? "${bio.substring(0, 32)}..." : bio)
-        ],
-      ),
-    );
     return InkWell(
       onTap: () {
         _launchURL(context, biolink);
       },
-      child: Card(
-        margin: EdgeInsets.all(5.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        child: Row(
-          children: <Widget>[cardIcon, cardText],
+      child: new Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: new Container(
+          height: 115.0,
+          child: new Stack(
+            children: <Widget>[
+              astroCard(context),
+              new Positioned(top: 7.5, child: cardImage),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget astroCard(context) {
+    return new Positioned(
+      right: 0.0,
+      child: new Container(
+        width: 290.0,
+        height: 115.0,
+        child: new Card(
+          color: Colors.blueAccent[50],
+          child: new Padding(
+            padding: const EdgeInsets.only(
+              top: 8.0,
+              bottom: 8.0,
+              left: 64.0,
+            ),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                new Text(astronaut.name,
+                    style: Theme.of(context).textTheme.headline),
+                new Text(astronaut.location,
+                    style: Theme.of(context).textTheme.subhead),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        new Icon(
+                          Icons.star,
+                        ),
+                        new Text(astronaut.daysinspace)
+                      ],
+                    ),
+                    Image.network(astronaut.countryflag, height: 32.0, width: 32.0),
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

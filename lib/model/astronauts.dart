@@ -15,7 +15,7 @@ Future<List<Astronauts>> fetchAstronauts(http.Client client) async {
 
 List<Astronauts> parseAstronauts(String responseBody) {
   final parsed =
-      json.decode(responseBody)['people'].cast<Map<String, dynamic>>();
+  json.decode(responseBody)['people'].cast<Map<String, dynamic>>();
 
   return parsed
       .map<Astronauts>((json) => Astronauts.fromJson(json))
@@ -36,23 +36,27 @@ class Astronauts {
   final String bio;
   final String biolink;
   final String twitter;
+  final String daysinspace;
 
-  Astronauts(
-      {this.name,
-      this.biophoto,
-      this.biophotowidth,
-      this.biophotoheight,
-      this.country,
-      this.countryflag,
-      this.launchdate,
-      this.careerdays,
-      this.title,
-      this.location,
-      this.bio,
-      this.biolink,
-      this.twitter});
+  Astronauts({this.name,
+    this.biophoto,
+    this.biophotowidth,
+    this.biophotoheight,
+    this.country,
+    this.countryflag,
+    this.launchdate,
+    this.careerdays,
+    this.title,
+    this.location,
+    this.bio,
+    this.biolink,
+    this.twitter,
+    this.daysinspace});
 
   factory Astronauts.fromJson(Map<String, dynamic> json) {
+    final date2 = DateTime.now();
+    final _launchdate = DateTime.parse(json['launchdate']);
+    final daysinspace = date2.difference(_launchdate).inDays.toString();
     return Astronauts(
         name: json['name'],
         biophoto: json['biophoto'],
@@ -66,6 +70,7 @@ class Astronauts {
         location: json['location'],
         bio: json['bio'],
         biolink: json['biolink'],
-        twitter: json['twitter']);
+        twitter: json['twitter'],
+        daysinspace: daysinspace);
   }
 }
