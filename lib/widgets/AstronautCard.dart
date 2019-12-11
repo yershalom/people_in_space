@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:people_in_space/model/astronauts.dart';
@@ -18,20 +17,20 @@ class AstronautCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var name = astronaut.name;
+//    var name = astronaut.name;
     var biophoto = astronaut.biophoto;
-    var biophotowidth = astronaut.biophotowidth;
-    var biophotoheight = astronaut.biophotoheight;
-    var country = astronaut.country;
-    var countryflag = astronaut.countryflag;
-    var launchdate = astronaut.launchdate;
-    var careerdays = astronaut.careerdays;
-    var title = astronaut.title;
-    var location = astronaut.location;
-    var bio = astronaut.bio;
+//    var biophotowidth = astronaut.biophotowidth;
+//    var biophotoheight = astronaut.biophotoheight;
+//    var country = astronaut.country;
+//    var countryflag = astronaut.countryflag;
+//    var launchdate = astronaut.launchdate;
+//    var careerdays = astronaut.careerdays;
+//    var title = astronaut.title;
+//    var location = astronaut.location;
+//    var bio = astronaut.bio;
     var biolink = astronaut.biolink;
-    var twitter = astronaut.twitter;
-    var daysinspace = astronaut.daysinspace;
+//    var twitter = astronaut.twitter;
+//    var daysinspace = astronaut.daysinspace;
 
     var cardImage = Container(
       width: 100.0,
@@ -45,35 +44,6 @@ class AstronautCard extends StatelessWidget {
       ),
     );
 
-    var cardContent = Container(
-        padding: EdgeInsets.all(16.0),
-        margin: EdgeInsets.all(5.0),
-        height: 170.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[cardImage, Text(name)],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Image.network(countryflag, height: 32.0, width: 32.0),
-                    Text(title),
-                  ],
-                )
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[Text(daysinspace), Text("DAYS IN SPACE")],
-            )
-          ],
-        ));
     return InkWell(
       onTap: () {
         _launchURL(context, biolink);
@@ -126,7 +96,8 @@ class AstronautCard extends StatelessWidget {
                         new Text(astronaut.daysinspace)
                       ],
                     ),
-                    Image.network(astronaut.countryflag, height: 32.0, width: 32.0),
+                    Image.network(astronaut.countryflag,
+                        height: 32.0, width: 32.0),
                   ],
                 )
               ],
