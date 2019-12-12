@@ -17,20 +17,8 @@ class AstronautCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    var name = astronaut.name;
     var biophoto = astronaut.biophoto;
-//    var biophotowidth = astronaut.biophotowidth;
-//    var biophotoheight = astronaut.biophotoheight;
-//    var country = astronaut.country;
-//    var countryflag = astronaut.countryflag;
-//    var launchdate = astronaut.launchdate;
-//    var careerdays = astronaut.careerdays;
-//    var title = astronaut.title;
-//    var location = astronaut.location;
-//    var bio = astronaut.bio;
     var biolink = astronaut.biolink;
-//    var twitter = astronaut.twitter;
-//    var daysinspace = astronaut.daysinspace;
 
     var cardImage = Container(
       width: 100.0,
@@ -63,7 +51,7 @@ class AstronautCard extends StatelessWidget {
     );
   }
 
-  Widget astroCard(context) {
+  Widget astroCard(BuildContext context) {
     return new Positioned(
       right: 0.0,
       child: new Container(
