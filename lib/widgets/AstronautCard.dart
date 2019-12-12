@@ -39,7 +39,7 @@ class AstronautCard extends StatelessWidget {
       ),
       placeholder: (context, url) => CircleAvatar(
         maxRadius: 50.0,
-        backgroundColor: Colors.brown.shade800,
+        backgroundColor: Colors.blue[900],
         child: Text(initials),
       ),
       errorWidget: (context, url, error) => Icon(Icons.error),
