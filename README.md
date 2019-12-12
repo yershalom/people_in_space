@@ -1,6 +1,12 @@
-# people_in_space
+# People in Space
 
-A new Flutter application.
+> Based on https://www.howmanypeopleareinspacerightnow.com/
+
+A new Flutter application showing how many people in space right now.
+
+## Screenshots
+
+<img width="354" alt="iOS" src="https://user-images.githubusercontent.com/7933604/70700421-623c0800-1cd3-11ea-828d-641fb302235c.png">
 
 ## Getting Started
 
