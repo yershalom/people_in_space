@@ -15,11 +15,9 @@ Future<List<Astronauts>> fetchAstronauts(http.Client client) async {
 
 List<Astronauts> parseAstronauts(String responseBody) {
   final parsed =
-  json.decode(responseBody)['people'].cast<Map<String, dynamic>>();
+      json.decode(responseBody)['people'].cast<Map<String, dynamic>>();
 
-  return parsed
-      .map<Astronauts>((json) => Astronauts.fromJson(json))
-      .toList();
+  return parsed.map<Astronauts>((json) => Astronauts.fromJson(json)).toList();
 }
 
 class Astronauts {
@@ -37,26 +35,33 @@ class Astronauts {
   final String biolink;
   final String twitter;
   final String daysinspace;
+  final String initials;
 
-  Astronauts({this.name,
-    this.biophoto,
-    this.biophotowidth,
-    this.biophotoheight,
-    this.country,
-    this.countryflag,
-    this.launchdate,
-    this.careerdays,
-    this.title,
-    this.location,
-    this.bio,
-    this.biolink,
-    this.twitter,
-    this.daysinspace});
+  Astronauts(
+      {this.name,
+      this.biophoto,
+      this.biophotowidth,
+      this.biophotoheight,
+      this.country,
+      this.countryflag,
+      this.launchdate,
+      this.careerdays,
+      this.title,
+      this.location,
+      this.bio,
+      this.biolink,
+      this.twitter,
+      this.daysinspace,
+      this.initials});
 
   factory Astronauts.fromJson(Map<String, dynamic> json) {
     final date2 = DateTime.now();
     final _launchdate = DateTime.parse(json['launchdate']);
     final daysinspace = date2.difference(_launchdate).inDays.toString();
+    final splitName = json['name'].toUpperCase().split(' ');
+    final firstName = splitName[0];
+    final lastName = splitName[1];
+    final initials = "${firstName[0]}${lastName[0]}";
     return Astronauts(
         name: json['name'],
         biophoto: json['biophoto'],
@@ -71,6 +76,7 @@ class Astronauts {
         bio: json['bio'],
         biolink: json['biolink'],
         twitter: json['twitter'],
-        daysinspace: daysinspace);
+        daysinspace: daysinspace,
+        initials: initials);
   }
 }

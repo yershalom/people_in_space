@@ -29,7 +29,8 @@ class _MyAppState extends State<MyApp> {
         ),
         image: FadeInImage.memoryNetwork(
           placeholder: kTransparentImage,
-          image: 'https://www.howmanypeopleareinspacerightnow.com/images/earth.jpg',
+          image:
+              'https://www.howmanypeopleareinspacerightnow.com/images/earth.jpg',
         ),
         backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:people_in_space/model/astronauts.dart';
@@ -19,17 +20,40 @@ class AstronautCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var biophoto = astronaut.biophoto;
     var biolink = astronaut.biolink;
+    var initials = astronaut.initials;
+    var countryflag = astronaut.countryflag;
+    var country = astronaut.country;
 
-    var cardImage = Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(biophoto),
+    var cardImage = CachedNetworkImage(
+      imageUrl: biophoto,
+      imageBuilder: (context, imageProvider) => Container(
+        width: 100.0,
+        height: 100.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
+      placeholder: (context, url) => CircleAvatar(
+        maxRadius: 50.0,
+        backgroundColor: Colors.brown.shade800,
+        child: Text(initials),
+      ),
+      errorWidget: (context, url, error) => Icon(Icons.error),
+    );
+
+    var flagImage = CachedNetworkImage(
+      imageUrl: countryflag,
+      imageBuilder: (context, imageProvider) => Image(
+        image: imageProvider,
+        height: 32.0,
+        width: 32.0,
+      ),
+      placeholder: (context, url) => Text(country),
+      errorWidget: (context, url, error) => Icon(Icons.error),
     );
 
     return InkWell(
@@ -42,7 +66,7 @@ class AstronautCard extends StatelessWidget {
           height: 115.0,
           child: new Stack(
             children: <Widget>[
-              astroCard(context),
+              astroCard(context, flagImage),
               new Positioned(top: 7.5, child: cardImage),
             ],
           ),
@@ -51,7 +75,7 @@ class AstronautCard extends StatelessWidget {
     );
   }
 
-  Widget astroCard(BuildContext context) {
+  Widget astroCard(BuildContext context, CachedNetworkImage flagImage) {
     return new Positioned(
       right: 0.0,
       child: new Container(
@@ -84,8 +108,7 @@ class AstronautCard extends StatelessWidget {
                         new Text(astronaut.daysinspace)
                       ],
                     ),
-                    Image.network(astronaut.countryflag,
-                        height: 32.0, width: 32.0),
+                    flagImage,
                   ],
                 )
               ],

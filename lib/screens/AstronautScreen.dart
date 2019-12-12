@@ -3,14 +3,12 @@ import 'package:people_in_space/model/astronauts.dart';
 import 'package:http/http.dart' as http;
 import 'package:people_in_space/widgets/AstronautsList.dart';
 
-
 class AstronautScreen extends StatefulWidget {
   @override
   AstronautScreenState createState() => new AstronautScreenState();
 }
 
 class AstronautScreenState extends State<AstronautScreen> {
-
   _renderBody() {
     return FutureBuilder<List<Astronauts>>(
         future: fetchAstronauts(http.Client()),
@@ -20,8 +18,7 @@ class AstronautScreenState extends State<AstronautScreen> {
           return snapshot.hasData
               ? AstronautsList(astronauts: snapshot.data)
               : Center(child: CircularProgressIndicator());
-        }
-    );
+        });
   }
 
   @override
@@ -31,7 +28,6 @@ class AstronautScreenState extends State<AstronautScreen> {
           title: Text('People in Space'),
           backgroundColor: Colors.blue[900],
         ),
-        body: _renderBody()
-    );
+        body: _renderBody());
   }
 }
