@@ -6,7 +6,7 @@ A new Flutter application showing how many people in space right now.
 
 ## Screenshots
 
-<img width="354" alt="iOS" src="https://user-images.githubusercontent.com/7933604/70700421-623c0800-1cd3-11ea-828d-641fb302235c.png">
+<img align="left" width="200" height="400" alt="iOS" src="https://user-images.githubusercontent.com/7933604/70700421-623c0800-1cd3-11ea-828d-641fb302235c.png">
 
 ## Getting Started
 
